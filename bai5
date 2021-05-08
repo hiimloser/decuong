@@ -1,0 +1,78 @@
+#include<stdio.h>
+#include<malloc.h>
+// cau 1
+void nhap(int *p,int n)
+{
+	for(int i=0;i<n;i++)
+	{
+		printf("a[%d] = ",i);
+		scanf("%d",(p+i));
+	}
+}
+// cau 2
+void xuat(int *p,int n)
+{
+	for(int i=0;i<n;i++)
+	{
+		printf("%5d",*(p+i));
+	}
+}
+//cau 3
+float tbc(int *p,int n,int x,int y)
+{
+	int sum =0;
+	int k=0;
+	for(int i=0;i<n;i++)
+	{
+		if(*(p+i)>x&&*(p+i)<y)
+		{
+			sum=sum+*(p+i);
+			k++;
+		}
+	}
+	return sum/k;
+}
+// cau 4
+int max(int *p,int n)
+{
+	int max=*p;
+	for(int i=0;i<n;i++)
+	{
+		if(*(p+i)>max)
+		{
+			max=*(p+i);
+		}
+	}
+	return max;
+}
+// cau 5
+void file(FILE *file,int *p,int n)
+{    
+    for(int i=0;i<n;i++)
+    {
+        if(*(p+i)<0)
+        {
+            fprintf(file,"%5.1f",*(p+i));
+        }
+    }
+}
+int main()
+{
+	FILE *arr;
+	arr = fopen("E://devc//decuong//bai5.txt","w");
+	int *p,n,x,y;
+	printf("n = ");
+	scanf("%d",&n);
+	p=(int*)malloc(n*sizeof(int));
+	nhap(p,n);
+	xuat(p,n);
+	printf("x = ");
+	scanf("%d",&x);
+	printf("y = ");
+	scanf("%d",&y);
+	printf("\ntrung binh cong cac so trong khoang %d - %d =%5.1f",x,y,tbc(p,n,x,y));
+	printf("\nso lon nhat :%d",max(p,n));
+	file(arr,p,n);
+	free(p);
+	return 0;
+}
