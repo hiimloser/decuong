@@ -1,0 +1,103 @@
+#include<stdio.h>
+#include<malloc.h>
+#include<math.h>
+// cau 1
+void nhap(int *p,int n)
+{
+	for(int i=0;i<n;i++)
+	{
+		printf("a[%d] = ",i);
+		scanf("%5d",(p+i));
+	}
+}
+// cau 2
+void xuat(int *p,int n)
+{
+	for(int i=0;i<n;i++)
+	{
+		printf("%5d",*(p+i));
+	}
+}
+// cau 3
+bool check(int n)
+{
+    if (n < 2)
+    {
+    	return false;
+	}     
+    for (int i=2;i<=sqrt(n);i++)
+    {
+        if(n%i==0)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+void sonto(int *p,int n)
+{
+    for (int i=0;i<n;i++)
+    {
+        if (check(*(p+i)))
+        {
+            printf("%5d",*(p+i));
+        }
+    }
+}
+// cau 4
+int pro(int*p, int n,int m)
+{
+	int k=0;	
+	for(int i=0;i<n;i++)
+	{
+		if(m==*(p+i))
+		{
+			k++;
+		}
+	}
+	if(k!=0)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+// cau 5
+void sochan(FILE *file,int *p,int n)
+{    
+    for(int i=0;i<n;i++)
+    {
+        if(*(p+i)%2==0)
+        {
+            fprintf(file,"%5d",*(p+i));
+        }
+    }
+}
+int main()
+{
+	FILE *arr;
+	arr = fopen("E://devc//decuong//bai4.txt","w");
+	int *p,n,x;
+	printf("n = ");
+	scanf("%d",&n);
+	p=(int*)malloc(n*sizeof(int));
+	nhap(p,n);
+	xuat(p,n);
+	printf("\nso nguyen to :\n");
+	sonto(p,n);
+	printf("\nx = ");
+	scanf("%d",&x);
+	if(pro(p,n,x)==1)
+	{
+		printf("\nco %d trong mang",x);
+	}
+	else
+	{
+		printf("\nkhong co gia tri nao");
+	}
+	sochan(arr,p,n);
+	free(p);
+	return 0;
+}
