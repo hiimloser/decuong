@@ -30,7 +30,14 @@ float tbc(int *p,int n,int x,int y)
 			k++;
 		}
 	}
-	return sum/k;
+	if(k!=0)
+	{
+		printf("\ntrung binh cong cac so trong khoang %d - %d =%5.1f",x,y,sum/k);
+	}
+	else
+	{
+		printf("khong co phan tu nao trong khoang %d - %d",x,y);
+	}
 }
 // cau 4
 int max(int *p,int n)
@@ -66,11 +73,11 @@ int main()
 	p=(int*)malloc(n*sizeof(int));
 	nhap(p,n);
 	xuat(p,n);
-	printf("x = ");
+	printf("\nx = ");
 	scanf("%d",&x);
 	printf("y = ");
 	scanf("%d",&y);
-	printf("\ntrung binh cong cac so trong khoang %d - %d =%5.1f",x,y,tbc(p,n,x,y));
+	tbc(p,n,x,y);
 	printf("\nso lon nhat :%d",max(p,n));
 	file(arr,p,n);
 	free(p);
