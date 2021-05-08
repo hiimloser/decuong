@@ -1,0 +1,97 @@
+#include<stdio.h>
+#include<malloc.h>
+// cau 1
+void nhap(float *p,int n)
+{
+	for(int i=0;i<n;i++)
+	{
+		printf("a[%d] = ",i);
+		scanf("%f",(p+i));
+	}
+}
+// cau 2
+void xuat(float *p,int n)
+{
+	for(int i=0;i<n;i++)
+	{
+		printf("%5.1f",*(p+i));
+	}
+}
+// cau 3
+float tbc(float *p,int n)
+{
+	int cout=0;
+	float sum=0;
+	for(int i=0;i<n;i++)
+	{
+		if(*(p+i)>0)
+		{
+			sum=sum+*(p+i);
+			cout++;
+		}
+	}
+	if(cout!=0)
+	{
+		return sum/cout;
+	}
+	else
+	{
+		return 0;
+	}
+}
+// cau 4
+void sapxep(float *p,int n)
+{
+	for(int i=0;i<n-1;i++)
+	{
+		for(int j=i+1;j<n;j++)
+		{
+			if(*(p+i)>*(p+j))
+			{
+				int tb = *(p+j);
+				*(p+j)=*(p+i);
+				*(p+i)=tb;
+			}
+		}
+	}
+}
+// cau 5	
+float element(FILE *file,float *p,int n)
+{    
+  
+    float ele=0;
+    for(int i=0;i<n;i++)
+    {
+        if(*(p+i)<10)
+        {
+            fprintf(file,"%5.1f",*(p+i));
+        }
+    }
+}
+int main()
+{
+	FILE *arr;
+	arr = fopen("E://devc//decuong//bai3.txt","w"); // tên tệp yêu cầu trong đề cương
+	int n;
+	float *p;
+	printf("n = ");
+	scanf("%d",&n);
+	p=(float*)malloc(n*sizeof(float));
+	nhap(p,n);
+	printf("mang sau khi nhap :\n");
+	xuat(p,n);
+	if(tbc(p,n)==0)
+	{
+		printf("\nkhong co so duong");
+	}
+	else
+	{
+		printf("\ntbc = %f",tbc(p,n));
+	}
+	sapxep(p,n);
+	printf("\nmang sau khi sap xep:\n");
+	xuat(p,n);
+	element(arr,p,n);
+	free(p);
+	return 0;
+}
