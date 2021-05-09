@@ -18,10 +18,10 @@ void xuat(int *p,int n)
 	}
 }
 //cau 3
-float tbc(int *p,int n,int x,int y)
+void tbc(int *p,int n,int x,int y)
 {
-	int sum =0;
-	int k=0;
+	float sum =0;
+	float k=0;
 	for(int i=0;i<n;i++)
 	{
 		if(*(p+i)>x&&*(p+i)<y)
@@ -59,7 +59,7 @@ void file(FILE *file,int *p,int n)
     {
         if(*(p+i)<0)
         {
-            fprintf(file,"%5.1f",*(p+i));
+            fprintf(file,"%5d",*(p+i));
         }
     }
 }
