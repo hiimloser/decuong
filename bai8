@@ -40,6 +40,22 @@ void soam(int *p,int n)
 		printf("\nkhong co so am nao trong mang");
 	}
 }
+// cau 4
+void sapxep(float *p,int n)
+{
+	for(int i=0;i<n-1;i++)
+	{
+		for(int j=i+1;j<n;j++)
+		{
+			if(*(p+i)>*(p+j))
+			{
+				int tb = *(p+j);
+				*(p+j)=*(p+i);
+				*(p+i)=tb;
+			}
+		}
+	}
+}
 // cau 5
 void sole(FILE *file,int *p,int n)
 {    
@@ -62,6 +78,9 @@ int main()
 	nhap(p,n);
 	xuat(p,n);
 	soam(p,n);
+	sapxep(p,n);
+	printf("\nmang sau khi sap xep:\n");
+	xuat(p,n);
 	sole(arr,p,n);
 	free(p);
 	fclose(arr);
