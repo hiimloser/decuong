@@ -1,0 +1,96 @@
+#include<stdio.h>
+#include<malloc.h>
+#include<math.h>
+// cau 1
+void nhap(int *p,int n)
+{
+	for(int i=0;i<n;i++)
+	{
+		printf("a[%d] = ",i);
+		scanf("%d",(p+i));
+	}
+}
+// cau 2
+void xuat(int *p,int n)
+{
+	for(int i=0;i<n;i++)
+	{
+		printf("%d\n",*(p+i));
+	}
+}
+// cau 3
+int check(int *p,int n)
+{
+	int min = *p;
+	int k,count=0;
+	for(int i=0;i<n;i++)
+	{
+		if(*(p+i)<0)
+		{
+			count++;
+			if(*(p+i)<min)
+			{
+				min = *(p+i);
+				k=i+1;
+			}
+		}
+	}
+	if(count!=0)
+	{
+		printf("phan tu am nho nhat o vi tri %d",k);
+	}
+	else
+	{
+		printf("khong co phan tu am nao");
+	}
+}
+// cau 4
+void sapxep(int *p,int n)
+{
+	for(int i=0;i<n-1;i++)
+	{
+		for(int j=i+1;j<n;j++)
+		{
+			if(*(p+i)<*(p+j))
+			{
+				int tb=*(p+j);
+				*(p+j)=*(p+i);
+				*(p+i)=tb;
+			}
+		}
+	}
+}
+// cau 5
+void file(FILE *file,int *p,int n)
+{    
+    for(int i=0;i<n;i++)
+    {
+        if(*(p+i)>0)
+        {
+            fprintf(file,"%5d",*(p+i));
+        }
+    }
+}
+int main()
+{
+	FILE *arr;
+	arr = fopen("E://devc//decuong//bai10.txt","w");
+	int *p,n,x;
+	do
+	{
+		printf("n = ");
+		scanf("%d",&n);
+	}
+	while(n<0);
+	p=(int*)malloc(n*sizeof(int));
+	nhap(p,n);
+	xuat(p,n);
+	check(p,n);
+	sapxep(p,n);
+	printf("mang sau khi sap xep:\n");
+	xuat(p,n);
+	file(arr,p,n);
+	free(p);
+	fclose(arr);
+	return 0;
+}
