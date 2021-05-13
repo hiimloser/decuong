@@ -1,0 +1,110 @@
+#include<stdio.h>
+#include<malloc.h>
+// cau1 nhap mang 
+void nhap(float *p,int n,int m)
+{
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            printf("a[%d][%d] = ",i,j);
+            scanf("%f",(p+i*m+j));
+        }
+    }
+}
+// cau 2 xuat mang
+void xuat(float *p,int n,int m)
+{
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            printf("%8.1f\t",*(p+i*m+j));
+        }
+        printf("\n");
+    }
+}
+// cau 3 tim` phan tu duong
+int soduong(float *p,int n,int m)
+{
+	int k=0;
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            if(*(p+i*m+j)>0)
+            {
+            	k++;
+			}
+        }
+    }
+    return k;
+}
+// cau 4 : tim tong so chan
+int sochan(float *p,int n,int m)
+{
+    int k =0;
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            if(*(p+i*m+j)-(int)*(p+i*m+j)==0) // kiem tra la so nguyen thi lay
+            {
+            	if((int)*(p+i*m+j)%2==0)
+            	{
+            		k++; 
+				}
+			}
+        }
+    }
+    return k;
+}
+// cau 5 doc ghi file in phan tu trong arr
+void file(FILE *file,float *p,int n, int m)
+{    
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+           if(*(p+i*m+j)>0)
+           {
+           		fprintf(file,"%5.1	f\t",*(p+i*m+j));
+		   }
+        }
+        fprintf(file,"\n");
+    }
+}
+int main()
+{
+    FILE *arr;
+    arr = fopen("E://devc//decuong//bai4arr2.txt","w"); // tep can nhap theo bai
+    int n,m;
+    float *p;
+    p = (float *)malloc(n*m* sizeof(float));
+    printf("nhap hang : ");
+    scanf("%d",&n);
+    printf("nhap cot : ");
+    scanf("%d",&m);
+    nhap(p,n,m);
+    xuat(p,n,m);
+    if(soduong!=0)
+    {
+    	printf("\nco %d so duong",soduong(p,n,m));
+	}
+	else
+	{
+		printf("\nkhong co so duong nao");
+	}
+	if(sochan!=0)
+    {
+    	printf("\nco %d so chan",sochan(p,n,m));
+	}
+	else
+	{
+		printf("\nkhong co so chan nao");
+	}
+    file(arr,p,n,m);
+    free(p);
+    fclose(arr);
+    return 0;
+}
