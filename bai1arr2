@@ -1,0 +1,92 @@
+#include<stdio.h>
+#include<malloc.h>
+// cau1
+void nhap(int *p,int n,int m)
+{
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            printf("a[%d][%d] = ",i,j);
+            scanf("%d",(p+i*m+j));
+        }
+    }
+}
+// cau 2
+void xuat(int *p,int n,int m)
+{
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            printf("%d\t",*(p+i*m+j));
+        }
+        printf("\n");
+    }
+}
+// cau 3
+float tbc(int *p,int n,int m)
+{
+    float sum=0;
+    int k=0;
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            if(*(p+i*m+j)%2==1)
+            {
+                sum=sum+*(p+i*m+j);
+                k++;
+            }
+        }
+    }
+    float kq=sum/k;
+    return kq;
+}
+// cau 4
+int max(int *p,int n,int m)
+{
+    int max=*p;
+    int col  = 0;
+    for(int i=0;i<n;i++)
+    {
+        if(*(p+i*m+col)>max)
+		{
+            max = *(p+i*m+col);
+        }
+    }
+    return max;
+}
+// cau 5
+void so(FILE *file,int *p,int n, int m)
+{    
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            if(*(p+i*m+j)<100)
+            {
+                fprintf(file,"%5d",*(p+i*m+j));
+            }
+        }
+    }
+}
+int main()
+{
+    FILE *arr;
+    arr = fopen("E://devc//decuong//bai1arr2.txt","w");
+    int *p,n,m;
+    p = (int )malloc(n*m sizeof(int));
+    printf("nhap hang : ");
+    scanf("%d",&n);
+    printf("nhap cot : ");
+    scanf("%d",&m);
+    nhap(p,n,m);
+    xuat(p,n,m);
+    printf("\ntbc = %5.1f",tbc(p,n,m));
+    printf("\nphan tu lon nhat cot 0 = %d",max(p,n,m));
+    so(arr,p,n,m);
+    free(p);
+    fclose(arr);
+    return 0;
+}
