@@ -1,0 +1,85 @@
+#include<stdio.h>
+#include<malloc.h>
+// cau1 nhap mang 
+void nhap(float *p,int n,int m)
+{
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            printf("a[%d][%d] = ",i,j);
+            scanf("%f",(p+i*m+j));
+        }
+    }
+}
+// cau 2 xuat mang
+void xuat(float *p,int n,int m)
+{
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            printf("%8.1f\t",*(p+i*m+j));
+        }
+        printf("\n");
+    }
+}
+// cau 3 tim` tong phan tu mang
+float tong(float *p,int n,int m)
+{
+	float sum =0;
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            sum=sum+*(p+i*m+j);
+        }
+    }
+    return sum;
+}
+// cau 4 : tim phan tu lon nhat o hang
+float max(float *p,int n,int m)
+{
+    float max =*p;
+    int row=0;
+    for(int j=0;j<m;j++)
+    {
+        if(*(p+row*m+j)>max)
+            {
+                max = *(p+row*m+j);
+            }
+    }
+    return max;
+}
+// cau 5 doc ghi file in phan tu trong arr
+void file(FILE *file,float *p,int n, int m)
+{    
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+           fprintf(file,"%5f\t",*(p+i*m+j));
+        }
+        printf("\n");
+    }
+}
+int main()
+{
+    FILE *arr;
+    arr = fopen("E://devc//decuong//bai2arr2.txt","w"); // tep can nhap theo bai
+    int n,m;
+    float *p;
+    p = (float *)malloc(n*m* sizeof(float));
+    printf("nhap hang : ");
+    scanf("%d",&n);
+    printf("nhap cot : ");
+    scanf("%d",&m);
+    nhap(p,n,m);
+    xuat(p,n,m);
+    printf("\ntong ptu mang = %8.1f",tong(p,n,m));
+    printf("\nphan tu lon nhat hang 0 = %8.1f",max(p,n,m));
+    file(arr,p,n,m);
+    free(p);
+    fclose(arr);
+    return 0;
+}
