@@ -1,0 +1,82 @@
+#include<stdio.h>
+#include<malloc.h>
+// cau 1 nhap ma tran vuong
+void nhap(float *p,int n)
+{
+	for(int i=0;i<n;i++)
+	{
+		for(int j=0;j<n;j++)
+		{
+			printf("a[%d][%d] = ",i,j);
+			scanf("%f",(p+i*n+j));
+		}
+	}
+}
+// cau 2 xuat ma tran
+void xuat(float *p,int n)
+{
+	for(int i=0;i<n;i++)
+	{
+		for(int j=0;j<n;j++)
+		{
+			printf("%8.1f",*(p+i*n+j));
+		}
+		printf("\n");
+	}
+}
+// cau 3 tong phan tu tren duong cheo chinh
+float tong(float *p,int n)
+{
+	float sum=0;
+	for(int i=0;i<n;i++)
+	{
+		for(int j=0;j<n;j++)
+		{
+			if(i==j)
+			{
+				sum=sum+*(p+i*n+j);
+			}
+		}
+	}
+	return sum;
+}
+// cau 4 sap xep phan tu cot 0 giam dan
+void swap(float &a, float &b)
+{
+	float sw=a;
+	a=b;
+	sw=b;
+}
+void sapxep(float *p,int n)
+{
+	for(int i=n-1;i>=0;i--)
+		{
+			if(*(p+0*n+0)<*(p+i*n+0))
+			{
+				swap(*(p+0*n+0),*(p+i*n+0));
+			}
+		}
+	for(int i=n-1;i>=0;i--)
+		{
+			if(*(p+(i-1)*n+0)<*(p+i*n+0))
+			{
+				swap(*(p+(i-1)*n+0),*(p+i*n+0));
+			}
+		}
+}
+int main()
+{
+	int n;
+	float *p;
+	printf("n = ");
+	scanf("%d",&n);
+	p=(float *)malloc(n*n*sizeof(float));
+	nhap(p,n);
+	xuat(p,n);
+	printf("\ntong ptu duong cheo chinh = %8.1f",tong(p,n));
+	sapxep(p,n);
+	printf("\nmang sau khi sap xep:\n");
+	xuat(p,n);
+	free(p);
+	return 0;
+}
