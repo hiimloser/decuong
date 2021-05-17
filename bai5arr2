@@ -43,26 +43,24 @@ float tong(float *p,int n)
 // cau 4 sap xep phan tu cot 0 giam dan
 void swap(float &a, float &b)
 {
-	float sw=a;
+	float sw; 
+	sw=a;
 	a=b;
-	sw=b;
+	b=sw;
 }
 void sapxep(float *p,int n)
 {
-	for(int i=n-1;i>=0;i--)
-		{
-			if(*(p+0*n+0)<*(p+i*n+0))
-			{
-				swap(*(p+0*n+0),*(p+i*n+0));
+    int row=0;
+    for(int i=0;i<n;i++)
+    {
+        for(int j=i;j<n;j++)
+        {
+        	if(*(p+i*n)<*(p+j*n))
+        	{
+        		swap(*(p+i*n),*(p+j*n));
 			}
 		}
-	for(int i=n-1;i>=0;i--)
-		{
-			if(*(p+(i-1)*n+0)<*(p+i*n+0))
-			{
-				swap(*(p+(i-1)*n+0),*(p+i*n+0));
-			}
-		}
+    }
 }
 int main()
 {
