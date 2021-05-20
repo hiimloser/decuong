@@ -59,7 +59,28 @@ int sochan(float *p,int n,int m)
     }
     return k;
 }
-// cau 5 doc ghi file in phan tu trong arr
+// cau 5 sap xep phan tu hang k tang dan
+void swap(float &a, float &b)
+{
+	float sw; 
+	sw=a;
+	a=b;
+	b=sw;
+}
+void sapxep(float *p,int n, int m,int k)
+{
+    for(int j=0;j<m;j++)
+    {
+        for(int o=j+1;o<m;o++)
+        {
+        	if(*(p+k*m+j)>*(p+k*m+o))
+        	{
+        		swap(*(p+k*m+j),*(p+k*m+o));
+			}
+		}
+    }
+}
+// cau 6 doc ghi file in phan tu trong arr
 void file(FILE *file,float *p,int n, int m)
 {    
     for(int i=0;i<n;i++)
@@ -103,6 +124,16 @@ int main()
 	{
 		printf("\nkhong co so chan nao");
 	}
+	int k;
+	do
+	{
+		printf("\nsap xep hang : ");
+		scanf("%d",&k);
+	}
+	while(k<0||k>=m);
+	sapxep(p,n,m,k);
+	printf("\nmang sau khi sap xep:\n");
+	xuat(p,n,m);
     file(arr,p,n,m);
     free(p);
     fclose(arr);
