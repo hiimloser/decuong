@@ -1,0 +1,93 @@
+#include<stdio.h>
+#include<malloc.h>
+// cau1 nhap mang
+void nhap(int *p,int n,int m)
+{
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            printf("a[%d][%d] = ",i,j);
+            scanf("%d",(p+i*m+j));
+        }
+    }
+}
+// cau 2 xuat mang
+void xuat(int *p,int n,int m)
+{
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            printf("%d\t",*(p+i*m+j));
+        }
+        printf("\n");
+    }
+}
+// cau 3 kiem tra 2 so duong canh nhau 
+int check(int *p,int n,int m)
+{
+	int k=0;
+	// neu theo hang  cot
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            if(*(p+i*m+j)>0&&*(p+i*m+j)==*(p+i*m+(j+1)))
+            {
+            	k++;
+			}
+        }
+    }
+    
+    // neu theo  mang 1 chieu
+    for(int i=0;i<n*m;i++)
+    {
+    	if(*(p+i)>0&&*(p+i)==*(p+i+1))
+    	{
+    		k++;
+		}
+	}
+    return k;
+}
+// cau 4 sap xep mang theo chieu giam dan
+void sapxep(int *p,int n,int m)
+{
+	int k=*p;
+	for(int i=0;i<n*m;i++)
+    {
+    	for(int j=i+1;j<m*n;j++)
+        {
+            if(*(p+i)<*(p+j))
+            {
+            	k=*(p+i);
+            	*(p+i)=*(p+j);
+            	*(p+j)=k;
+			}
+        }
+	}
+}
+int main()
+{
+    int *p,n,m;
+    p = (int *)malloc(n*m* sizeof(int));
+    printf("nhap hang : ");
+    scanf("%d",&n);
+    printf("nhap cot : ");
+    scanf("%d",&m);
+    nhap(p,n,m);
+    xuat(p,n,m);
+    if(check(p,n,m)==0)
+    {
+    	printf("\nkhong co");
+	}
+	else
+	{
+		printf("\nco");
+	}
+	sapxep(p,n,m);
+	printf("\nmang sau khi sap xep:\n");
+	xuat(p,n,m);
+    free(p);
+    return 0;
+}
