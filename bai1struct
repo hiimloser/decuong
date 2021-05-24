@@ -1,0 +1,88 @@
+#include<stdio.h>
+#include<string.h>
+#include<malloc.h>
+
+struct PC
+{
+	char mapc[50];
+	char tenpc[50];
+	int namsx;
+	char hangsx[50];
+	float gia;
+};
+void nhap(PC*p)
+{
+	printf("nhap ma pc : ");
+	fflush(stdin);
+	gets(p->mapc);
+	printf("nhap ten pc : ");
+	fflush(stdin);
+	gets(p->tenpc);
+	printf("nhap nam sx : ");
+	scanf("%d",&p->namsx);
+	printf("nhap hang sx : ");
+	fflush(stdin);
+	gets(p->hangsx);
+	printf("nhap gia : ");
+	scanf("%f",&p->gia);
+}
+void xuat(PC*p)
+{
+	printf("%s-%s-%d-%s-%f",p->mapc,p->tenpc,p->namsx,p->hangsx,p->gia);
+}
+void samsung(PC*p, int &n)
+{
+	char ss[]= "samsung";
+	int k=0;
+	for(int i=0;i<n;i++)
+	{
+		if(strstr((p+i)->hangsx,ss)!=NULL)
+		{
+			printf("may tinh %d\n",i+1);
+			k++;
+		}
+	}
+}
+void namSx(PC*p,int n)
+{
+	int c = 2019;
+	int k=0;
+	for(int i=0;i<n;i++)
+	{
+		if(c == (p+i)->namsx)
+		{
+			printf("may tinh %d\n",i+1);
+			k++;
+		}
+	}
+	if(k==0)
+	{
+		printf("khong co may tinh nao");
+	}
+}
+int main()
+{
+	int n;
+	printf("moi nhap so may tinh : ");
+	scanf("%d",&n);
+	struct PC *p;
+	p=(PC*)malloc(n*sizeof(PC));
+	for(int i=0;i<n;i++)
+	{
+		printf("moi nhap pc %d:\n",i+1);
+		nhap(p+i);
+		printf("\n");
+	}
+	printf("\n-----------------------------\n");
+	for(int i=0;i<n;i++)
+	{
+		xuat(p+i);
+		printf("\n");
+	}
+	printf("\ncac may tinh cua hang samsung:\n");
+	samsung(p,n);
+	printf("\ncac may tinh sx nam 2019:\n");
+	namSx(p,n);
+	free(p);
+	return 0;
+}
