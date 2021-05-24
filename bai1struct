@@ -1,7 +1,8 @@
 #include<stdio.h>
 #include<string.h>
 #include<malloc.h>
-
+#include<conio.h>
+// tao cau truc may tinh
 struct PC
 {
 	char mapc[50];
@@ -10,6 +11,7 @@ struct PC
 	char hangsx[50];
 	float gia;
 };
+// cau 1 nhap thong tin may tinh
 void nhap(PC*p)
 {
 	printf("nhap ma pc : ");
@@ -26,10 +28,12 @@ void nhap(PC*p)
 	printf("nhap gia : ");
 	scanf("%f",&p->gia);
 }
+// cau 2 xuat thong tin may tinh
 void xuat(PC*p)
 {
 	printf("%s-%s-%d-%s-%f",p->mapc,p->tenpc,p->namsx,p->hangsx,p->gia);
 }
+// cau 3 xuat may tinh co hang samsung
 void samsung(PC*p, int &n)
 {
 	char ss[]= "samsung";
@@ -42,8 +46,13 @@ void samsung(PC*p, int &n)
 			k++;
 		}
 	}
+	if(k==0)
+	{
+		printf("khong co may tinh nao\n");
+	}
 }
-void namSx(PC*p,int n)
+// cau 4 xuat may tinh co namsx 2019
+void namSx(PC*p,int n) 
 {
 	int c = 2019;
 	int k=0;
@@ -57,7 +66,24 @@ void namSx(PC*p,int n)
 	}
 	if(k==0)
 	{
-		printf("khong co may tinh nao");
+		printf("khong co may tinh nao\n");
+	}
+}
+// cau 5 xuat may tinh co gia >2000
+void price(PC*p,int n)
+{
+	int k=0;
+	for(int i=0;i<n;i++)
+	{
+		if((p+i)->gia>2000)
+		{
+			printf("may tinh %d\n",i+1);
+			k++;
+		}
+	}
+	if(k==0)
+	{
+		printf("khong co may tinh nao\n");
 	}
 }
 int main()
@@ -83,6 +109,9 @@ int main()
 	samsung(p,n);
 	printf("\ncac may tinh sx nam 2019:\n");
 	namSx(p,n);
+	printf("\ncac may tinh co gia >2000:\n");
+	price(p,n);
 	free(p);
+	getch();
 	return 0;
 }
