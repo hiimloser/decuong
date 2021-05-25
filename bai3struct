@@ -1,0 +1,114 @@
+#include<stdio.h>
+#include<string.h>
+#include<malloc.h>
+struct KH
+{
+	char sdt[225];
+	char ht[225];
+	char diachi[225];
+	int sodien;
+};
+// cau 1 nhap thong tin
+void nhap(KH*p)
+{
+	printf("nhap so dien thoai : ");
+	fflush(stdin);
+	gets(p->sdt);
+	printf("nhap ho va ten : ");
+	fflush(stdin);
+	gets(p->ht);
+	printf("nhap dia chi : ");
+	fflush(stdin);
+	gets(p->diachi);
+	printf("nhap so dien su dung : ");
+	scanf("%d",&p->sodien);
+}
+// cau 2 xuat thong tin khach hang 
+void xuat(KH*p)
+{
+	printf("%s-%s-%s-%d",p->sdt,p->ht,p->diachi,p->sodien);
+}
+// cau 3 hien thi khach hang o CG
+void cg(KH*p,int n)
+{
+	char ss[]="CG";
+	int k=0;
+	for(int i=0;i<n;i++)
+	{
+		if(strstr((p+i)->diachi,ss))
+		{
+			printf("Khach hang %d\n",i+1);
+			k++;
+		}
+	}
+	if(k==0)
+	{
+		printf("khong co khach hang nao\n");
+	}
+}
+// tim khach hang = sdt
+void check(KH*p,int n,char x[])
+{
+	int k=0;
+	for(int i=0;i<n;i++)
+	{
+		if(strstr((p+i)->sdt,x))
+		{
+			printf("Khach hang %d\n",i+1);
+			k++;
+		}
+	}
+	if(k==0)
+	{
+		printf("khong co khach hang nao\n");
+	}
+}
+// cau 5 khach hang tieu thu dien >500
+void tieuthu(KH*p,int n)
+{
+	int k=0;
+	for(int i=0;i<n;i++)
+	{
+		if((p+i)->sodien>500)
+		{
+			printf("Khach hang %d\n",i+1);
+			k++;
+		}
+	}
+	if(k==0)
+	{
+		printf("khong co khach hang nao\n");
+	}
+}
+int main()
+{
+	int n;
+	printf("so luong khach hang : ");
+	scanf("%d",&n);
+	struct KH *p;
+	p=(KH*)malloc(n*sizeof(KH));
+	for(int i=0;i<n;i++)
+	{
+		printf("Khach hang %d:\n",i+1);
+		nhap(p+i);
+		printf("\n");
+	}
+	printf("\n-----------------------------\n");
+	for(int i=0;i<n;i++)
+	{
+		xuat(p+i);
+		printf("\n");
+	}
+	printf("\ncac khach hang o CG :\n");
+	cg(p,n);
+	char x[255];
+	printf("\nmoi nhap so dien thoai can tim : ");
+	fflush(stdin);
+	gets(x);
+	printf("khach hang can tim :\n");
+	check(p,n,x);
+	printf("\nkhach hang tieu thu dien>500 :\n");
+	tieuthu(p,n);
+	free(p);
+	return 0;
+}
