@@ -1,0 +1,115 @@
+#include<stdio.h>
+#include<string.h>
+#include<malloc.h>
+struct SV
+{
+	char msv[225];
+	char ht[225];
+	int namsinh;
+	char lop[225];
+	float diem;
+};
+// cau 1 nhap thong tin sinh vien
+void nhap(SV*p)
+{
+	printf("ma sinh vien : ");
+	fflush(stdin);
+	gets(p->msv);
+	printf("ho va ten : ");
+	fflush(stdin);
+	gets(p->ht);
+	printf("nam sinh : ");
+	scanf("%d",&p->namsinh);
+	printf("lop : ");
+	fflush(stdin);
+	gets(p->lop);
+	printf("tong diem : ");
+	scanf("%f",&p->diem);
+}
+// cau 2 hien thi thong tin
+void xuat(SV*p)
+{
+	printf("%s-%s-%d-%s-%f",p->msv,p->ht,p->namsinh,p->lop,p->diem);
+}
+// cau 3 hien thi thong tin sinh vien tong diem >4
+void check(SV*p, int n)
+{
+	int k=0;
+	for(int i=i;i<n;i++)
+	{
+		if((p+i)->diem>4)
+		{
+			printf("sinh vien %d\n",i+1);
+			printf("%s-%s-%d-%s-%f",(p+i)->msv,(p+i)->ht,(p+i)->namsinh,(p+i)->lop,(p+i)->diem);
+			printf("\n");
+			k++;
+		}
+	}
+	if(k==0)
+	{
+		printf("khong co sinh vien nao");
+	}
+}
+// cau hien thi sinh vien lopD15CNTT7
+void cntt7(SV*p,int n)
+{
+	char ss[]="D15CNTT7";
+	int k=0;
+	for(int i=0;i<n;i++)
+	{
+		if(strstr((p+i)->lop,ss))
+		{
+			printf("sinh vien %d\n",i+1);
+			k++;
+		}
+	}
+	if(k==0)
+	{
+		printf("khong co sinh vien nao\n");
+	}
+}
+// cau 5 thong tin sinh vien co nam sinh 2000
+void born(SV*p,int n)
+{
+	int k=0;
+	for(int i=0;i<n;i++)
+	{
+		if((p+i)->namsinh==2000)
+		{
+			printf("sinh vien %d\n",i+1);
+			k++;
+		}
+	}
+	if(k==0)
+	{
+		printf("khong co sinh vien nao\n");
+	}
+}
+int main()
+{
+	int n;
+	printf("so luong sinh vien : ");
+	scanf("%d",&n);
+	struct SV *p;
+	p=(SV*)malloc(n*sizeof(SV));
+	for(int i=0;i<n;i++)
+	{
+		printf("sinh vien %d:\n",i+1);
+		nhap(p+i);
+		printf("\n");
+	}
+	printf("\n-----------------------------\n");
+	for(int i=0;i<n;i++)
+	{
+		xuat(p+i);
+		printf("\n");
+	}
+	printf("\nsinh vien diem tong >4 :\n");
+	check(p,n);
+	printf("\nso hoc sinh lop D15CNTT7 :\n");
+	cntt7(p,n);
+	printf("\nsinh vien sinh nam 2000 :\n");
+	born(p,n);
+	free(p);
+	return 0;
+}
