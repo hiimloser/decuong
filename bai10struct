@@ -1,0 +1,101 @@
+#include<stdio.h>
+#include<string.h>
+#include<malloc.h>
+struct SV
+{
+	char msv[225];
+	char ht[225];
+	float dtk;	
+};
+// cau 1 nhap thong tin sinh vien
+void nhap(SV*p)
+{
+	printf("ma sinh vien : ");
+	fflush(stdin);
+	gets(p->msv);
+	printf("ho va ten : ");
+	fflush(stdin);
+	gets(p->ht);
+	printf("diem tong ket : ");
+	scanf("%f",&p->dtk);
+}
+// cau 2 xuat thong tin sinh vien
+void xuat(SV*p)
+{
+	printf("%s-%s-%f",p->msv,p->ht,p->dtk);
+}
+// cau 3 tim sinh vien theo ma
+void check(SV*p,int n,char a[])
+{
+	int k=0;
+	for(int i=0;i<n;i++)
+	{
+		if(strstr(a,(p+i)->msv))
+		{
+			printf("%s-%s-%f\n",(p+i)->msv,(p+i)->ht,(p+i)->dtk);
+			k++;
+		}
+	}
+	if(k==0)
+	{
+		printf("khong co sinh vien nao");
+	}
+}
+// cau 4 tinh tong diem
+float total(SV*p,int n)
+{
+	float k=0;
+	for(int i=0;i<n;i++)
+	{
+		k=k+(p+i)->dtk;
+	}
+	return k;
+}
+// cau 5 thong tin sinh vien co diem >8.5
+void point(SV*p , int n)
+{	
+	int k=0;
+	for(int i=0;i<n;i++)
+	{
+		if((p+i)->dtk>5)
+		{
+			xuat(p+i);
+			printf("\n");
+			k++;
+		}
+	}
+	if(k==0)
+	{
+		printf("khong co sinhvien nao\n");
+	}
+}
+int main()
+{
+	int n;
+	printf("so luong hoc sinh : ");
+	scanf("%d",&n);
+	struct SV *p;
+	p=(SV*)malloc(n*sizeof(SV));
+	for(int i=0;i<n;i++)
+	{
+		printf("moi nhap sv %d:\n",i+1);
+		nhap(p+i);
+		printf("\n");
+	}
+	printf("\n-----------------------------\n");
+	for(int i=0;i<n;i++)
+	{
+		xuat(p+i);
+		printf("\n");
+	}
+	char a[255];
+	printf("\nmoi nhap ma sinh vien can tim : ");
+	fflush(stdin);
+	gets(a);
+	check(p,n,a);
+	printf("\ntong diem sinh vien : %5.2f",total(p,n));
+	printf("\nsinh vien co diem tong ket >8.5 : ");
+	point(p,n);
+	free(p);
+	return 0;
+}
