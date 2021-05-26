@@ -1,0 +1,88 @@
+#include<stdio.h>
+#include<string.h>
+#include<malloc.h>
+struct NV
+{
+	char mnv[225];
+	char ht[225];
+	int ns;
+	float hsl;
+};
+// cau 1 nhap thong tin nhan vien
+void nhap(NV*p)
+{
+	printf("ma nhan vien : ");
+	fflush(stdin);
+	gets(p->mnv);
+	printf("ho va ten : ");
+	fflush(stdin);
+	gets(p->ht);
+	printf("nam sinh : ");
+	scanf("%d",&p->ns);
+	printf("he so luong : ");
+	scanf("%f",&p->hsl);
+}
+// cau 2 hien thi thong tin
+void xuat(NV*p)
+{
+	printf("%s-%s-%d-%f",p->mnv,p->ht,p->ns,p->hsl);
+}
+// cau 3 tinh luong nhan vien
+void salary(NV*p, int n)
+{
+	for(int i=0;i<n;i++)
+	{
+		printf("luong nhan vien %d : %f\n",i+1,(p+i)->hsl*1950);
+	}
+}
+// cau 4  in ra nhan vien co ma NV01
+void element(NV*p,int n)
+{
+	char c[]="nv001";
+	for(int i=0;i<n;i++)
+	{
+		if(strstr((p+i)->mnv,c))
+		{	
+			printf("%s-%s-%d-%f\n",(p+i)->mnv,(p+i)->ht,(p+i)->ns,(p+i)->hsl);
+		}
+	}
+}
+// cau 5 thong tin nhan vien co luong <5000
+void check(NV*p,int n)
+{
+	for(int i=0;i<n;i++)
+	{
+		float tb=(p+i)->hsl*1950;
+		if(tb<5000)
+		{
+			printf("%s-%s-%d-%f\n",(p+i)->mnv,(p+i)->ht,(p+i)->ns,(p+i)->hsl);
+		}
+	}
+}
+int main()
+{
+	int n;
+	printf("so luong nhan vien : ");
+	scanf("%d",&n);
+	struct NV *p;
+	p=(NV*)malloc(n*sizeof(NV));
+	for(int i=0;i<n;i++)
+	{
+		printf("moi nhap nv %d:\n",i+1);
+		nhap(p+i);
+		printf("\n");
+	}
+	printf("\n-----------------------------\n");
+	for(int i=0;i<n;i++)
+	{
+		xuat(p+i);
+		printf("\n");
+	}
+	salary(p,n);
+	printf("\nnhan vien co ma nv001 :\n");
+	element(p,n);
+	printf("\nnhan vien luong <5000 :\n");
+	check(p,n);
+	free(p);
+	return 0;
+}
